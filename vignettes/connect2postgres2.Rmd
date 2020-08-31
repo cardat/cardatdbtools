@@ -44,7 +44,7 @@ dbGetQuery(ch, "select * from public.dbsize ")
 
 Now the function can be used as a shortcut:
 
-```{r}
+```{r, eval = F}
 library(cardatdbtools)
 ch <- connect2postgres2("postgis_car")
 ```
