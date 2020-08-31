@@ -22,10 +22,12 @@ First it is good to test things out:
 library(cardatdbtools)
 if(!require("RPostgreSQL")) install.packages("RPostgreSQL"); library("RPostgreSQL")
 
-username <- "postgis_user"
+username <- "postgis_user_name"
+hostip <- "ip.address.of.database"
+dbname <- "name_of_the_database"
 
-pwd <- get_pgpass(database = "postgis_car",
-                  host = "swish4.tern.org.au",
+pwd <- get_pgpass(database = dbname,
+                  host = hostip,
                   user = username,
                   remote = TRUE,
                   savePassword = TRUE)
@@ -46,7 +48,7 @@ Now the function can be used as a shortcut:
 
 ```{r, eval = F}
 library(cardatdbtools)
-ch <- connect2postgres2("postgis_car", 
-                        host = "swish4.tern.org.au",
+ch <- connect2postgres2(database = dbname, 
+                        host = hostip,
                         user = username)
 ```
