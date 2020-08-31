@@ -1,0 +1,51 @@
+---
+title: "connect2postgres"
+author: "ivanhanigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Impact}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+
+library(cardatdbtools)
+```
+
+This vignette demonstrates connecting to the CARDAT PostGIS database server
+
+```{r, eval = F}
+if(!require("devtools")) install.packages("devtools"); library(devtools)
+if(!require(cardatdbtools)){
+  install_github("cardat/cardatdbtools", build_vignettes = TRUE)
+}
+library(cardatdbtools)
+if(!require("RPostgreSQL")) install.packages("RPostgreSQL"); library("RPostgreSQL")
+
+username <- "postgis_user"
+
+pwd <- get_pgpass(database = "postgis_car",
+                  host = "swish4.tern.org.au",
+                  user = username,
+                  remote = TRUE,
+                  savePassword = TRUE)
+
+ch <- connect2postgres(
+                 hostip = pwd[,1],
+                 db = pwd[,3],
+                 user = pwd[,4],
+                 p = pwd[,5])
+
+rm(pwd) # remove the password
+
+dbGetQuery(ch, "select * from public.dbsize ")
+```
+
