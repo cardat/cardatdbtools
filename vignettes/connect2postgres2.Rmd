@@ -14,6 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+The function `connect2postgres2` is a helpful command that trys to connect to the database specified. It relies on the functions `getPassword`, `get_pgpass` to see if you already defined the connection and password information needed (in the secure `pgpass` file that can hold this confidential info) and if it find the info it passes it on to the `connect2postgres` function.
+
+First it is good to test things out: 
+
 ```{r setup}
 library(cardatdbtools)
 if(!require("RPostgreSQL")) install.packages("RPostgreSQL"); library("RPostgreSQL")
@@ -35,4 +39,12 @@ ch <- connect2postgres(
 rm(pwd) # remove the password
 
 dbGetQuery(ch, "select * from public.dbsize ")
+```
+
+
+Now the function can be used as a shortcut:
+
+```{r}
+library(cardatdbtools)
+ch <- connect2postgres2("postgis_car")
 ```
