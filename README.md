@@ -1,4 +1,7 @@
 # cardatdbtools
-CAR's database tools
+CAR's PostGIS database tools
 
-TODO
+```r
+library(devtools)
+install_github("cardat/cardatdbtools", build_vignettes = TRUE)
+```
