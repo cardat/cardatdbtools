@@ -18,7 +18,7 @@ The function `connect2postgres2` is a helpful command that trys to connect to th
 
 First it is good to test things out: 
 
-```{r setup}
+```{r setup, eval = F}
 library(cardatdbtools)
 if(!require("RPostgreSQL")) install.packages("RPostgreSQL"); library("RPostgreSQL")
 
