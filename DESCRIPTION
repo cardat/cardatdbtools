@@ -7,3 +7,7 @@ Author: ivanhanigan
 Maintainer: <ivan.hanigan@gmail.com>
 Description: database tools
 License: GPL (>= 2)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

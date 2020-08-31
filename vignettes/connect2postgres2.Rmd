@@ -1,7 +1,5 @@
 ---
 title: "connect2postgres2"
-author: "ivanhanigan"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{connect2postgres2}
@@ -9,24 +7,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.width = 7,
-  fig.height = 5
+  comment = "#>"
 )
-
-library(cardatdbtools)
 ```
 
-This vignette demonstrates connecting to the CARDAT PostGIS database server
-
-```{r, eval = F}
-if(!require("devtools")) install.packages("devtools"); library(devtools)
-if(!require(cardatdbtools)){
-  install_github("cardat/cardatdbtools", build_vignettes = TRUE)
-}
+```{r setup}
 library(cardatdbtools)
 if(!require("RPostgreSQL")) install.packages("RPostgreSQL"); library("RPostgreSQL")
 
@@ -48,4 +36,3 @@ rm(pwd) # remove the password
 
 dbGetQuery(ch, "select * from public.dbsize ")
 ```
-
