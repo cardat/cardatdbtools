@@ -1,0 +1,9 @@
+Package: cardatdbtools
+Type: Package
+Title: Database tools for use with the CARDAT PostGIS database server
+Version: 1.0
+Date: 2020-08-31
+Author: ivanhanigan
+Maintainer: <ivan.hanigan@gmail.com>
+Description: database tools
+License: GPL (>= 2)
