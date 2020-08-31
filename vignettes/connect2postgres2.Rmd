@@ -1,10 +1,10 @@
 ---
-title: "connect2postgres"
+title: "connect2postgres2"
 author: "ivanhanigan"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Impact}
+  %\VignetteIndexEntry{connect2postgres2}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
