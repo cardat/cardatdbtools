@@ -46,5 +46,7 @@ Now the function can be used as a shortcut:
 
 ```{r, eval = F}
 library(cardatdbtools)
-ch <- connect2postgres2("postgis_car")
+ch <- connect2postgres2("postgis_car", 
+                        host = "swish4.tern.org.au",
+                        user = username)
 ```
