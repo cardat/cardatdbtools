@@ -26,17 +26,9 @@ username <- "postgis_user_name"
 hostip <- "ip.address.of.database"
 dbname <- "name_of_the_database"
 
-pwd <- get_pgpass(database = dbname,
-                  host = hostip,
-                  user = username,
-                  remote = TRUE,
-                  savePassword = TRUE)
+pwd <- get_pgpass(database = dbname,host = hostip,user = username,remote = TRUE,savePassword = TRUE)
 
-ch <- connect2postgres(
-                 hostip = pwd[,1],
-                 db = pwd[,3],
-                 user = pwd[,4],
-                 p = pwd[,5])
+ch <- connect2postgres(hostip = pwd[,1],db = pwd[,3],user = pwd[,4],p = pwd[,5])
 
 rm(pwd) # remove the password
 

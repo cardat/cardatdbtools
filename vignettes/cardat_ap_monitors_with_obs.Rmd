@@ -1,0 +1,54 @@
+---
+title: "cardat_ap_monitors_with_obs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{cardat_ap_monitors_with_obs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = F}
+library(cardatdbtools)
+if(!require("RPostgreSQL")) install.packages("RPostgreSQL"); library("RPostgreSQL")
+
+username <- "ivan_hanigan"
+hostip <- "swish4.tern.org.au"
+dbname <- "postgis_car"
+pwd <- get_pgpass(database = dbname,host = hostip,user = username,remote = TRUE,savePassword = TRUE)
+ch <- connect2postgres(hostip = pwd[,1],db = pwd[,3],user = pwd[,4],p = pwd[,5])
+rm(pwd) # remove the password
+
+# test
+# dbGetQuery(ch, "select * from public.dbsize ")
+
+#### create our study region ####
+sql <- "select *
+into fileb2f1bad353_test_stdyreg
+from 
+abs_ste.ste_2011_aus
+where ste_name11 in ('New South Wales', 'Victoria', 'Australian Capital Territory')"
+
+dbSendQuery(ch, sql)
+
+#### find AP monitors ####
+# get all monitors within this region, and create it as a table in the database
+sql <- postgis_extract_points_in_polygon(poly_lyr = "fileb2f1bad353_test_stdyreg", 
+                                         out_table = "fileb2f1bad353_test")
+cat(sql)
+dbSendQuery(ch, sql)
+# get the station names
+dbGetQuery(ch, "select station, state from fileb2f1bad353_test")
+
+#### find those with data ####
+sql <- cardat_ap_monitors_with_obs(var = "o3", study_region_monitors = "fileb2f1bad353_test")
+cat(sql)
+dat_ap <- dbGetQuery(ch, sql)
+# with thanks to the data providers from NSW, ACT and VIC.
+```
