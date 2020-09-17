@@ -23,6 +23,7 @@ where d.variable = '",var,"'
 and d.value is not null
 group by d.state, d.station, l.lon, l.lat, l.altitude"
 )
+print("With thanks to NSW DPIE, EPA Victoria, SA EPA, NT EPA, EPA Tasmania, ACT Health, Qld DES, WA DWER for provision of the air pollution monitoring data in this database.")
 print("Please note that this query will take a few minutes to complete.")
 return(sql)
 }
