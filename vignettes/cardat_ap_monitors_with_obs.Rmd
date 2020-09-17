@@ -52,4 +52,8 @@ sql <- cardat_ap_monitors_with_obs(var = "o3", study_region_monitors = "fileb2f1
 cat(sql)
 dat_ap <- dbGetQuery(ch, sql)
 # with thanks to the data providers from NSW, ACT and VIC.
+
+# clean up
+dbSendQuery(ch, "drop table fileb2f1bad353_test_stdyreg")
+dbSendQuery(ch, "drop table fileb2f1bad353_test")
 ```
