@@ -29,6 +29,7 @@ rm(pwd) # remove the password
 # dbGetQuery(ch, "select * from public.dbsize ")
 
 #### create our study region ####
+## TODO Note that the table specified 'into' needs to change
 sql <- "select *
 into fileb2f1bad353_test_stdyreg
 from 
