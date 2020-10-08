@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(cardatdbtools)
 if(!require("RPostgreSQL")) install.packages("RPostgreSQL"); library("RPostgreSQL")
 
-username <- "ivan_hanigan"
+username <- "postgis_user_name"
 hostip <- "swish4.tern.org.au"
 dbname <- "postgis_car"
 pwd <- get_pgpass(database = dbname,host = hostip,user = username,remote = TRUE,savePassword = TRUE)
