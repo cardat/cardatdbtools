@@ -10,7 +10,7 @@
 ##year = "all"
 ## The year(s) Multiple years
 
-cardat_ap_daily_averages <- function(
+cardat_ap_monthly_averages <- function(
   var = 'pm25', 
   state = "all", 
   threshold = 0.7,
@@ -30,8 +30,8 @@ cardat_ap_daily_averages <- function(
   }
   sql <- sprintf("
   
-  SELECT daily_avs.state, daily_avs.station, daily_avs.lat, daily_avs.lon, daily_avs.year, EXTRACT(MONTH FROM daily_avs.date) as month,  average(daily_avs.daily_av) as monthly_av, daily_avs.measurement_method, count(*) as no_days_above_threshold
-  FROM (SELECT l.state, l.station, l.lat, l.lon, d.date, d.variable, avg(d.value) as daily_av, d.units, d.measurement_method, count(*) as number_of_readings
+  SELECT daily_avs.state, daily_avs.station, daily_avs.lat, daily_avs.lon, daily_avs.year, EXTRACT(MONTH FROM daily_avs.date) as month,  avg(daily_avs.daily_av) as monthly_av, daily_avs.measurement_method, count(*) as no_days_above_threshold
+  FROM (SELECT l.state, l.station, l.lat, l.lon, d.year,d.date, d.variable, avg(d.value) as daily_av, d.units, d.measurement_method, count(*) as number_of_readings
     FROM air_pollution_monitors.ap_monitor_locations_master as l, air_pollution_monitors.ap_monitor_data_master d
     WHERE d.station = l.station
     AND d.state = l.state
@@ -49,10 +49,10 @@ cardat_ap_daily_averages <- function(
   return(sql)                
 }
 
-# #### Test the function
-# ## connect to the db
-# ch<-connect2postgres("swish4.tern.org.au","postgis_car","christy_geromboux")
-# ## generate sql for query
-# sql<-cardat_daily_averages(var='no2',state='NSW',year='2019')
+#### Test the function
+## connect to the db
+#ch<-connect2postgres("swish4.tern.org.au","postgis_car","christy_geromboux")
+## generate sql for query
+# sql<-cardat_ap_monthly_averages(var='no2',state='NSW',year='2019')
 # dat<-dbGetQuery(ch,sql)
-# 
+# dbDisconnect(ch)
