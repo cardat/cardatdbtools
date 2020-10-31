@@ -30,8 +30,8 @@ cardat_ap_daily_averages <- function(
   }
   sql <- sprintf("
   
-  SELECT daily_avs.state, daily_avs.station, daily_avs.lat, daily_avs.lon, daily_avs.year, EXTRACT(MONTH FROM daily_avs.date) as month,  average(daily_avs.daily_av) as monthly_av, daily_avs.measurement_method, count(*) as no_days_above_threshold
-  FROM (SELECT l.state, l.station, l.lat, l.lon, d.date, d.variable, avg(d.value) as daily_av, d.units, d.measurement_method, count(*) as number_of_readings
+ 
+SELECT l.state, l.station, l.lat, l.lon, d.year,d.date, d.variable, avg(d.value) as daily_av, d.units, d.measurement_method, count(*) as number_of_readings
     FROM air_pollution_monitors.ap_monitor_locations_master as l, air_pollution_monitors.ap_monitor_data_master d
     WHERE d.station = l.station
     AND d.state = l.state
@@ -39,20 +39,18 @@ cardat_ap_daily_averages <- function(
     %s
     %s
     GROUP BY l.state, l.station, l.lat, l.lon, d.year, d.date, d.variable, d.units, d.measurement_method
-    HAVING count(*)>=%s) as daily_avs
-    GROUP BY daily_avs.state, daily_avs.station, daily_avs.lat, daily_avs.lon, daily_avs.year, EXTRACT(MONTH FROM daily_avs.date), daily_avs.measurement_method
-    HAVING count(*)>=%s;
-    ", var, states, years, threshold*24,threshold*30)
+    HAVING count(*)>=%s*24;
+    ", var, states, years, threshold)
   
   print("With thanks to NSW DPIE, EPA Victoria, SA EPA, NT EPA, EPA Tasmania, ACT Health, Qld DES, WA DWER for provision of the air pollution monitoring data in this database.")
   print("Please note that this query will take a few minutes to complete.")
   return(sql)                
 }
 
-# #### Test the function
-# ## connect to the db
-# ch<-connect2postgres("swish4.tern.org.au","postgis_car","christy_geromboux")
-# ## generate sql for query
-# sql<-cardat_daily_averages(var='no2',state='NSW',year='2019')
-# dat<-dbGetQuery(ch,sql)
-# 
+#### Test the function
+## connect to the db
+ch<-connect2postgres("swish4.tern.org.au","postgis_car","christy_geromboux")
+## generate sql for query
+sql<-cardat_ap_daily_averages(var='no2',state='NSW',year='2019')
+dat<-dbGetQuery(ch,sql)
+
