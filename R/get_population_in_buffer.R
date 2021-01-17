@@ -32,7 +32,7 @@ update ",out_table," set pop_count
 
 )
   if(!is.null(out_table)){
-    sql_txt <- paste0("drop table if exists ",out_table,";\n", sql_txt)
+    sql_txt <- paste0("drop table if exists ",out_table,";", sql_txt)
   }
 #  print(sql_txt)
   sql_txt
