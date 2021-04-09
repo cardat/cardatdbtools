@@ -28,7 +28,7 @@ union all select poly_lyr.*
 from ",out_table," pts, 
   ",poly_lyr," ply
 where st_within(pts.",points_lyr_geom_col,", poly_lyl.",poly_lyr_geom_col,");
-update ",out_table," set pop_count
+update ",out_table," set pop_count"
 
 )
   if(!is.null(out_table)){
