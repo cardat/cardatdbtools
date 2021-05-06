@@ -39,10 +39,10 @@ get_pgpass <- function(database, host, user, remote = FALSE, savePassword = FALS
       pwd <- as.character(pwd)
 
     } else {
-      pwd <- swishdbtools::getPassword(remote = remote)
+      pwd <- getPassword(remote = remote)
     }
   } else {
-    pwd <- swishdbtools::getPassword(remote = remote)
+    pwd <- getPassword(remote = remote)
     recordIndex <- NULL
   }
   record <- c(V1 = host, V2 = "5432", V3 = database, V4 = user, V5 = pwd)
