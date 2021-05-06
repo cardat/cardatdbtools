@@ -49,8 +49,8 @@ SELECT l.state, l.station, l.lat, l.lon, d.year,d.date, d.variable, avg(d.value)
 
 #### Test the function
 ## connect to the db
-ch<-connect2postgres("swish4.tern.org.au","postgis_car","christy_geromboux")
+##ch<-connect2postgres("swish4.tern.org.au","postgis_car","christy_geromboux")
 ## generate sql for query
-sql<-cardat_ap_daily_averages(var='no2',state='NSW',year='2019')
-dat<-dbGetQuery(ch,sql)
+##sql<-cardat_ap_daily_averages(var='no2',state='NSW',year='2019')
+##dat<-dbGetQuery(ch,sql)
 
