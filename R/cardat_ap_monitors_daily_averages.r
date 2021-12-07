@@ -53,4 +53,5 @@ SELECT l.state, l.station, l.lat, l.lon, d.year,d.date, d.variable, avg(d.value)
 ## generate sql for query
 ##sql<-cardat_ap_daily_averages(var='no2',state='NSW',year='2019')
 ##dat<-dbGetQuery(ch,sql)
+##
 
